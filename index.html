@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Thiên Long IOS - VN</title>
     
     <!-- Tailwind CSS -->
@@ -18,27 +18,25 @@
             background-color: #050505;
         }
         
-        /* Font Serif cho Tên */
         .font-serif {
             font-family: 'Playfair Display', serif;
         }
 
-        /* Glassmorphism Card - Thu nhỏ để lộ ảnh nền phía sau */
+        /* Glassmorphism Card with smooth depth */
         .glass-card {
-            background: rgba(20, 20, 20, 0.2);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(15, 15, 15, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            transform-style: preserve-3d;
         }
 
-        /* Neon Pulse Animation for Avatar */
         @keyframes neon-pulse {
             0% { box-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9; }
             100% { box-shadow: 0 0 20px #0ea5e9, 0 0 35px #0ea5e9; }
         }
 
-        /* Typing cursor blink */
         .cursor {
             display: inline-block;
             width: 2px;
@@ -50,7 +48,6 @@
             50% { opacity: 0; }
         }
 
-        /* Fade In Up Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -62,17 +59,15 @@
             }
         }
         
-        /* Hiệu ứng chuyển động cho nền */
         @keyframes slow-move {
             0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
         .animate-bg {
             animation: slow-move 20s infinite ease-in-out;
         }
 
-        /* Gyroscope permission button style */
         #gyro-permission-btn {
             background: rgba(14, 165, 233, 0.2);
             border: 1px solid rgba(14, 165, 233, 0.5);
@@ -81,113 +76,139 @@
         #gyro-permission-btn:hover {
             background: rgba(14, 165, 233, 0.4);
         }
+
+        /* Interactive Glow Hover Effects for Social Buttons */
+        .social-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .social-btn.facebook:hover {
+            background: rgba(24, 119, 242, 0.15);
+            border-color: rgba(24, 119, 242, 0.6);
+            box-shadow: 0 0 20px rgba(24, 119, 242, 0.4);
+            transform: translateY(-2px);
+        }
+        .social-btn.zalo:hover {
+            background: rgba(0, 104, 255, 0.15);
+            border-color: rgba(0, 104, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 104, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .social-btn.telegram:hover {
+            background: rgba(14, 165, 233, 0.15);
+            border-color: rgba(14, 165, 233, 0.6);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+            transform: translateY(-2px);
+        }
+        .social-btn.tiktok:hover {
+            background: rgba(236, 72, 153, 0.15);
+            border-color: rgba(236, 72, 153, 0.6);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
-<body class="overflow-hidden bg-black text-white selection:bg-cyan-500 selection:text-white relative">
+<body class="overflow-x-hidden bg-black text-white selection:bg-cyan-500 selection:text-white relative min-h-screen">
     
-    <!-- Background Image -->
-    <img src="./1387268 (1).jpg" onerror="this.onerror=null; this.src='https://placehold.co/1080x1920/1a1a2e/ffffff?text=Background'" alt="Background" class="animate-bg absolute inset-0 w-full h-full object-cover opacity-80" />
+    <!-- Background Image with fallback error protection -->
+    <img src="./1387268 (1).jpg" onerror="this.style.display='none'" alt="Background" class="animate-bg fixed inset-0 w-full h-full object-cover opacity-85 pointer-events-none" />
     
     <!-- Dark Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-black/20 via-black/50 to-black pointer-events-none"></div>
     
     <!-- Canvas for Snow Effect -->
-    <canvas id="snow-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+    <canvas id="snow-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
     <!-- Gyroscope Permission Prompt for iOS 13+ devices -->
-    <div id="gyro-banner" class="absolute top-4 left-1/2 -translate-x-1/2 z-50 hidden">
+    <div id="gyro-banner" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden">
         <button id="gyro-permission-btn" onclick="requestGyroPermission()" class="text-xs px-3 py-1.5 rounded-full text-cyan-300 backdrop-blur-md shadow-lg flex items-center gap-1.5 cursor-pointer">
             <i class="fas fa-compass animate-spin"></i> Bật hiệu ứng nghiêng 3D
         </button>
     </div>
 
-    <!-- Main Content Container -->
-    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8">
+    <!-- Main Content Container with compact sizing -->
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-6">
         
-        <!-- 3D Tilt Box (Thu nhỏ kích thước để lộ nhiều ảnh nền) -->
-        <div id="tilt-box" class="w-[88%] max-w-[310px] glass-card rounded-[2rem] p-6 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out]">
+        <!-- 3D Tilt Box -->
+        <div id="tilt-box" class="w-[85%] max-w-[290px] glass-card rounded-[2rem] p-5 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out]">
             
             <!-- Avatar -->
-            <div class="relative mb-4 group">
-                <!-- Vòng sáng phía sau Avatar -->
+            <div class="relative mb-3 group">
                 <div class="absolute inset-0 bg-cyan-500 rounded-full blur-md opacity-40 group-hover:opacity-70 transition duration-500"></div>
-                <img src="./6686ae04340f0125502a1fc08bf482da.jpg" onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" alt="Avatar" class="relative w-24 h-24 rounded-full object-cover border-2 border-white/20 z-10 transition-transform duration-300 group-hover:scale-105" style="animation: neon-pulse 1.5s infinite alternate;">
+                <img src="./6686ae04340f0125502a1fc08bf482da.jpg" onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" alt="Avatar" class="relative w-20 h-20 rounded-full object-cover border-2 border-white/20 z-10 transition-transform duration-300 group-hover:scale-105" style="animation: neon-pulse 1.5s infinite alternate;">
             </div>
 
-            <!-- Tên và Icon Hoa Anh Đào -->
-            <div class="flex items-center justify-center gap-2 mt-1 w-full whitespace-nowrap">
-                <h1 class="text-[1.7rem] font-bold italic font-serif tracking-wide text-white drop-shadow-md">
+            <!-- Name and Glowing Sakura Icon -->
+            <div class="flex items-center justify-center gap-1.5 mt-1 w-full whitespace-nowrap">
+                <h1 class="text-[1.5rem] font-bold italic font-serif tracking-wide text-white drop-shadow-md">
                     Thiên Long IOS
                 </h1>
-                <!-- Hoa Anh Đào Hồng Phát Sáng -->
                 <div class="relative flex items-center justify-center hover:scale-110 transition-transform duration-300">
-                    <span class="text-[22px] animate-pulse" style="filter: drop-shadow(0 0 12px rgba(255, 105, 180, 1));">🌸</span>
+                    <span class="text-[20px] animate-pulse" style="filter: drop-shadow(0 0 10px rgba(255, 105, 180, 1));">🌸</span>
                 </div>
             </div>
 
-            <!-- Hiệu ứng Gõ chữ -->
-            <div class="typing-container mb-3 mt-1 w-full text-center">
-                <span id="typing-text" class="text-gray-300 text-[11px] tracking-widest uppercase font-semibold"></span><span class="cursor">|</span>
+            <!-- Typing Effect -->
+            <div class="typing-container mb-2 mt-1 w-full text-center">
+                <span id="typing-text" class="text-gray-300 text-[10px] tracking-widest uppercase font-semibold"></span><span class="cursor">|</span>
             </div>
 
-            <!-- Huy Hiệu Kỹ Năng (Skill Tags) -->
-            <div class="flex flex-wrap justify-center gap-1.5 mb-5 w-full">
-                <span class="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border border-sky-500/50 text-sky-400 bg-sky-500/10 shadow-[0_0_8px_rgba(14,165,233,0.3)] transition-transform hover:scale-105"><i class="fas fa-laptop-code mr-1"></i> iOS Developer</span>
-                <span class="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border border-[#39ff14]/50 text-[#39ff14] bg-[#39ff14]/10 shadow-[0_0_8px_rgba(57,255,20,0.3)] transition-transform hover:scale-105"><i class="fas fa-dragon mr-1"></i> Hắc Long</span>
-                <span class="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border border-purple-500/50 text-purple-400 bg-purple-500/10 shadow-[0_0_8px_rgba(168,85,247,0.3)] transition-transform hover:scale-105"><i class="fas fa-gamepad mr-1"></i> Gamer</span>
+            <!-- Skill Tags -->
+            <div class="flex flex-wrap justify-center gap-1 mb-4 w-full">
+                <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-sky-500/50 text-sky-400 bg-sky-500/10 shadow-[0_0_6px_rgba(14,165,233,0.3)]"><i class="fas fa-laptop-code mr-1"></i> iOS Dev</span>
+                <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-[#39ff14]/50 text-[#39ff14] bg-[#39ff14]/10 shadow-[0_0_6px_rgba(57,255,20,0.3)]"><i class="fas fa-dragon mr-1"></i> Hắc Long</span>
+                <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-purple-500/50 text-purple-400 bg-purple-500/10 shadow-[0_0_6px_rgba(168,85,247,0.3)]"><i class="fas fa-gamepad mr-1"></i> Gamer</span>
             </div>
 
-            <!-- Nút Mạng Xã Hội -->
-            <div class="w-full flex flex-col gap-3">
-                <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" class="relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm">
-                    <i class="fab fa-facebook text-blue-500 text-lg absolute left-5 group-hover:scale-125 transition-transform"></i>
-                    <span class="font-medium tracking-wide text-sm">Facebook</span>
+            <!-- Social Links with Interactive Glow Hover -->
+            <div class="w-full flex flex-col gap-2.5">
+                <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" class="social-btn facebook relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fab fa-facebook text-blue-500 text-base absolute left-4 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide text-xs">Facebook</span>
                 </a>
                 
-                <a href="http://zaloapp.com/qr/p/1409r842vh1p1" target="_blank" class="relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm">
-                    <i class="fas fa-comment-dots text-sky-400 text-lg absolute left-5 group-hover:scale-125 transition-transform"></i>
-                    <span class="font-medium tracking-wide text-sm">Zalo</span>
+                <a href="http://zaloapp.com/qr/p/1409r842vh1p1" target="_blank" class="social-btn zalo relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fas fa-comment-dots text-sky-400 text-base absolute left-4 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide text-xs">Zalo</span>
                 </a>
                 
-                <a href="https://t.me/tlios_alex" target="_blank" class="relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm">
-                    <i class="fab fa-telegram plane text-cyan-500 text-lg absolute left-5 group-hover:scale-125 transition-transform"></i>
-                    <span class="font-medium tracking-wide text-sm">Telegram</span>
+                <a href="https://t.me/tlios_alex" target="_blank" class="social-btn telegram relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fab fa-telegram plane text-cyan-500 text-base absolute left-4 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide text-xs">Telegram</span>
                 </a>
 
-                <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK" target="_blank" class="relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-pink-500/10 hover:border-pink-500/50 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-300 overflow-hidden shadow-sm">
-                    <i class="fab fa-tiktok text-white group-hover:text-pink-500 text-lg absolute left-5 group-hover:scale-125 transition-transform"></i>
-                    <span class="font-medium tracking-wide text-sm">TikTok</span>
+                <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK" target="_blank" class="social-btn tiktok relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fab fa-tiktok text-white group-hover:text-pink-500 text-base absolute left-4 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide text-xs">TikTok</span>
                 </a>
             </div>
             
-            <!-- Footer & Visitor Counter -->
-            <div class="mt-6 flex flex-col items-center gap-1.5">
-                <div class="text-[11px] text-gray-400 tracking-wider flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                    <i class="fas fa-eye text-cyan-400"></i> Lượt truy cập: <span id="visitor-count" class="font-bold text-cyan-300">4,560</span>
+            <!-- Visitor Counter & Footer -->
+            <div class="mt-4 flex flex-col items-center gap-1">
+                <div class="text-[10px] text-gray-400 tracking-wider flex items-center gap-1 bg-white/5 px-2.5 py-0.5 rounded-full border border-white/10">
+                    <i class="fas fa-eye text-cyan-400"></i> Truy cập: <span id="visitor-count" class="font-bold text-cyan-300">4,560</span>
                 </div>
-                <div class="text-[10px] text-gray-500 tracking-wider">
+                <div class="text-[9px] text-gray-500 tracking-wider">
                     ©thienlongios
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Script Thư viện VanillaTilt 3D -->
+    <!-- VanillaTilt 3D Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
     
     <script>
-        // 1. Kích hoạt hiệu ứng nghiêng 3D và Gyroscope
+        // Enhanced 3D Tilt Initialization
         VanillaTilt.init(document.querySelector("#tilt-box"), {
-            max: 15,           
+            max: 15,          
             speed: 400,       
             glare: true,      
-            "max-glare": 0.2, 
-            scale: 5.5,
+            "max-glare": 0.3, 
+            scale: 10,      
             gyroscope: true   
         });
 
-        // Xử lý cấp quyền cảm biến Gyroscope cho các trình duyệt iOS yêu cầu bảo mật cao (iOS 13+)
         function requestGyroPermission() {
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 DeviceOrientationEvent.requestPermission()
@@ -202,15 +223,13 @@
             }
         }
 
-        // Tự động kiểm tra xem thiết bị có cần nút cấp quyền Gyroscope hay không
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                // Hiển thị nút bật cảm biến cho iPhone
                 document.getElementById('gyro-banner').style.display = 'block';
             }
         });
 
-        // 2. Hiệu ứng gõ chữ
+        // Typing effect
         const text = "ĐẸP TRAI VÀ ĐẲNG CẤP";
         let textIndex = 0;
         function typeWriter() {
@@ -222,11 +241,10 @@
             }
         }
 
-        // 3. Bộ đếm lượt truy cập an toàn (Tránh lỗi Null)
+        // Visitor counter
         function initVisitorCounter() {
             let countObj = localStorage.getItem('tlios_visitors');
             let count = 4560; 
-            
             if (countObj) {
                 count = parseInt(countObj) + 1;
             }
@@ -237,7 +255,6 @@
                 countDisplay.innerText = count.toLocaleString();
             }
 
-            // Tự động nhảy số ngẫu nhiên mô phỏng lượt xem live
             setInterval(() => {
                 if (Math.random() > 0.6) {
                     count++;
@@ -254,7 +271,7 @@
             initVisitorCounter();
         };
 
-        // 4. Hiệu ứng Tuyết rơi
+        // Snowfall effect
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -269,7 +286,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        for (let i = 0; i < 80; i++) {
+        for (let i = 0; i < 70; i++) {
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
