@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Thiên Long IOS - VN</title>
+    <title>Thiên Long IOS - Bio</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,6 +12,11 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap');
+
+        /* Biến CSS lưu trữ màu của Avatar (Mặc định là Cyan) */
+        :root {
+            --avatar-color: #0ea5e9; 
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -32,9 +37,10 @@
             transform-style: preserve-3d;
         }
 
-        @keyframes neon-pulse {
-            0% { box-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9; }
-            100% { box-shadow: 0 0 20px #0ea5e9, 0 0 35px #0ea5e9; }
+        /* Hiệu ứng nhịp đập Neon động dựa trên màu ảnh */
+        @keyframes neon-pulse-dynamic {
+            0% { box-shadow: 0 0 5px var(--avatar-color), 0 0 10px var(--avatar-color); }
+            100% { box-shadow: 0 0 20px var(--avatar-color), 0 0 35px var(--avatar-color); }
         }
 
         .cursor {
@@ -110,7 +116,7 @@
 
 <body class="overflow-x-hidden bg-black text-white selection:bg-cyan-500 selection:text-white relative min-h-screen">
     
-    <!-- Background Image with fallback error protection -->
+    <!-- Background Image -->
     <img src="./1387268 (1).jpg" onerror="this.style.display='none'" alt="Background" class="animate-bg fixed inset-0 w-full h-full object-cover opacity-85 pointer-events-none" />
     
     <!-- Dark Gradient Overlay -->
@@ -119,7 +125,7 @@
     <!-- Canvas for Snow Effect -->
     <canvas id="snow-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
-    <!-- Gyroscope Permission Prompt for iOS 13+ devices -->
+    <!-- Gyroscope Permission Prompt for iOS 13+ -->
     <div id="gyro-banner" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden">
         <button id="gyro-permission-btn" onclick="requestGyroPermission()" class="text-xs px-3 py-1.5 rounded-full text-cyan-300 backdrop-blur-md shadow-lg flex items-center gap-1.5 cursor-pointer">
             <i class="fas fa-compass animate-spin"></i> Bật hiệu ứng nghiêng 3D
@@ -127,15 +133,18 @@
     </div>
 
     <!-- Main Content Container with compact sizing -->
-    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-6">
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-6 pointer-events-none">
         
         <!-- 3D Tilt Box -->
-        <div id="tilt-box" class="w-[85%] max-w-[290px] glass-card rounded-[2rem] p-5 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out]">
+        <div id="tilt-box" class="w-[85%] max-w-[290px] glass-card rounded-[2rem] p-5 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out] pointer-events-auto">
             
             <!-- Avatar -->
             <div class="relative mb-3 group">
-                <div class="absolute inset-0 bg-cyan-500 rounded-full blur-md opacity-40 group-hover:opacity-70 transition duration-500"></div>
-                <img src="./6686ae04340f0125502a1fc08bf482da.jpg" onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" alt="Avatar" class="relative w-20 h-20 rounded-full object-cover border-2 border-white/20 z-10 transition-transform duration-300 group-hover:scale-105" style="animation: neon-pulse 1.5s infinite alternate;">
+                <!-- Vòng sáng phía sau Avatar (Lấy màu từ biến CSS) -->
+                <div id="avatar-glow" class="absolute inset-0 rounded-full blur-md opacity-40 group-hover:opacity-70 transition duration-500" style="background-color: var(--avatar-color);"></div>
+                
+                <!-- Ảnh Avatar -->
+                <img id="avatar-img" crossorigin="anonymous" src="./6686ae04340f0125502a1fc08bf482da.jpg" onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" alt="Avatar" class="relative w-20 h-20 rounded-full object-cover border-[2.5px] z-10 transition-transform duration-300 group-hover:scale-105" style="border-color: var(--avatar-color); animation: neon-pulse-dynamic 1.5s infinite alternate;">
             </div>
 
             <!-- Name and Glowing Sakura Icon -->
@@ -153,6 +162,12 @@
                 <span id="typing-text" class="text-gray-300 text-[10px] tracking-widest uppercase font-semibold"></span><span class="cursor">|</span>
             </div>
 
+            <!-- Online Status Badge -->
+            <div class="flex items-center gap-1.5 mb-3 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[9px] text-emerald-400 font-medium">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>System Online • Active</span>
+            </div>
+
             <!-- Skill Tags -->
             <div class="flex flex-wrap justify-center gap-1 mb-4 w-full">
                 <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-sky-500/50 text-sky-400 bg-sky-500/10 shadow-[0_0_6px_rgba(14,165,233,0.3)]"><i class="fas fa-laptop-code mr-1"></i> iOS Dev</span>
@@ -160,7 +175,7 @@
                 <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-purple-500/50 text-purple-400 bg-purple-500/10 shadow-[0_0_6px_rgba(168,85,247,0.3)]"><i class="fas fa-gamepad mr-1"></i> Gamer</span>
             </div>
 
-            <!-- Social Links with Interactive Glow Hover -->
+            <!-- Social Links with Interactive Glow -->
             <div class="w-full flex flex-col gap-2.5">
                 <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" class="social-btn facebook relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 overflow-hidden shadow-sm">
                     <i class="fab fa-facebook text-blue-500 text-base absolute left-4 group-hover:scale-125 transition-transform"></i>
@@ -189,41 +204,119 @@
                     <i class="fas fa-eye text-cyan-400"></i> Truy cập: <span id="visitor-count" class="font-bold text-cyan-300">4,560</span>
                 </div>
                 <div class="text-[9px] text-gray-500 tracking-wider">
-                    ©thienlongios
+                    © Thiên Long Ios
                 </div>
             </div>
         </div>
     </div>
 
     <!-- VanillaTilt 3D Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <script>
-        // Enhanced 3D Tilt Initialization
-        VanillaTilt.init(document.querySelector("#tilt-box"), {
-            max: 15,          
-            speed: 400,       
-            glare: true,      
-            "max-glare": 0.3, 
-            scale: 1.05,      
-            gyroscope: true   
-        });
+        // --- Smart Avatar Color Extractor ---
+        function applyAvatarDominantColor() {
+            const img = document.getElementById('avatar-img');
+            if (!img) return;
 
+            const extractColor = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                canvas.width = img.width || img.naturalWidth;
+                canvas.height = img.height || img.naturalHeight;
+
+                try {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const data = imageData.data;
+                    
+                    let r = 0, g = 0, b = 0, count = 0;
+                    
+                    // Lặp qua các pixel để lấy màu trung bình (bỏ qua các điểm màu quá tối/đen)
+                    for (let i = 0; i < data.length; i += 16) { 
+                        if (data[i] + data[i+1] + data[i+2] > 50) { 
+                            r += data[i];
+                            g += data[i+1];
+                            b += data[i+2];
+                            count++;
+                        }
+                    }
+                    
+                    if (count > 0) {
+                        r = Math.floor(r / count);
+                        g = Math.floor(g / count);
+                        b = Math.floor(b / count);
+                        
+                        // Cập nhật biến CSS --avatar-color với màu vừa tính toán
+                        const dominantColor = `rgb(${r}, ${g}, ${b})`;
+                        document.documentElement.style.setProperty('--avatar-color', dominantColor);
+                    }
+                } catch (e) {
+                    console.log("Không thể trích xuất màu do chế độ bảo mật trình duyệt, dùng màu gốc.");
+                }
+            };
+
+            if (img.complete) {
+                extractColor();
+            } else {
+                img.addEventListener('load', extractColor);
+            }
+        }
+
+        // Global variable for VanillaTilt instance
+        let tiltInstance;
+        const tiltElement = document.querySelector("#tilt-box");
+
+        // Initialization function for VanillaTilt
+        function initTilt() {
+            if(tiltInstance) {
+                tiltInstance.destroy();
+            }
+            
+            VanillaTilt.init(tiltElement, {
+                max: 20,          
+                speed: 400,       
+                glare: true,      
+                "max-glare": 0.3, 
+                scale: 1.05,      
+                gyroscope: true,
+                gyroscopeMinAngleX: -45,
+                gyroscopeMaxAngleX:  45,
+                gyroscopeMinAngleY: -45,
+                gyroscopeMaxAngleY:  45 
+            });
+            tiltInstance = tiltElement.vanillaTilt;
+        }
+
+        initTilt();
+
+        // iOS 13+ DeviceOrientation permission handling
         function requestGyroPermission() {
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 DeviceOrientationEvent.requestPermission()
                     .then(response => {
                         if (response === 'granted') {
                             document.getElementById('gyro-banner').style.display = 'none';
+                            initTilt();
+                        } else {
+                            alert("Bạn đã từ chối quyền cảm biến. Hiệu ứng nghiêng 3D bằng điện thoại sẽ không hoạt động.");
+                            document.getElementById('gyro-banner').style.display = 'none';
                         }
                     })
-                    .catch(console.error);
+                    .catch(error => {
+                        console.error("Error requesting DeviceOrientation permission:", error);
+                        alert("Không thể yêu cầu quyền truy cập cảm biến lúc này.");
+                    });
             } else {
                 document.getElementById('gyro-banner').style.display = 'none';
             }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            applyAvatarDominantColor();
+            
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 document.getElementById('gyro-banner').style.display = 'block';
             }
@@ -271,7 +364,7 @@
             initVisitorCounter();
         };
 
-        // Snowfall effect
+        // --- Snowfall effect ---
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
