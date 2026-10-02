@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiên Long IOS - Bio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+        }
+        
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.15);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes neon-pulse {
+            0% { box-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9; }
+            100% { box-shadow: 0 0 20px #0ea5e9, 0 0 35px #0ea5e9; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #0ea5e9;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slow-move {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .animate-bg {
+            animation: slow-move 20s infinite ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="overflow-hidden bg-black text-white selection:bg-cyan-500 selection:text-white relative">
+    
+    <!-- Background Image -->
+    <img src="./1387268 (1).jpg" onerror="this.onerror=null; this.src='https://placehold.co/1080x1920/1a1a2e/ffffff?text=Background'" alt="Background" class="animate-bg absolute inset-0 w-full h-full object-cover opacity-80" />
+    
+    <!-- Dark Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none"></div>
+    
+    <!-- Canvas for Snow Effect -->
+    <canvas id="snow-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8 overflow-y-auto">
+        
+        <div id="tilt-box" class="w-full max-w-sm glass-card rounded-[2.5rem] p-8 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out] my-auto">
+            
+            <!-- Avatar -->
+            <div class="relative mb-6 group">
+                <div class="absolute inset-0 bg-cyan-500 rounded-full blur-md opacity-40 group-hover:opacity-70 transition duration-500"></div>
+                <img src="./6686ae04340f0125502a1fc08bf482da.jpg" onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" alt="Avatar" class="relative w-28 h-28 rounded-full object-cover border-2 border-white/20 z-10 transition-transform duration-300 group-hover:scale-105" style="animation: neon-pulse 1.5s infinite alternate;">
+            </div>
+
+            <!-- Tên và Icon -->
+            <div class="flex items-center justify-center gap-2 mt-2 w-full whitespace-nowrap">
+                <h1 class="text-[2.2rem] font-bold italic font-serif tracking-wide text-white drop-shadow-md">
+                    Thiên Long IOS
+                </h1>
+                <div class="relative flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <span class="text-[28px] animate-pulse" style="filter: drop-shadow(0 0 12px rgba(255, 105, 180, 1));">🌸</span>
+                </div>
+            </div>
+
+            <!-- Typing Effect -->
+            <div class="typing-container mb-4 mt-2 w-full text-center">
+                <span id="typing-text" class="text-gray-300 text-sm tracking-widest uppercase font-semibold"></span><span class="cursor">|</span>
+            </div>
+
+            <!-- Skill Tags -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6 w-full">
+                <span class="px-3 py-1 text-xs font-semibold rounded-full border border-sky-500/50 text-sky-400 bg-sky-500/10 shadow-[0_0_8px_rgba(14,165,233,0.3)] transition-transform hover:scale-105"><i class="fas fa-laptop-code mr-1"></i> iOS Developer</span>
+                <span class="px-3 py-1 text-xs font-semibold rounded-full border border-[#39ff14]/50 text-[#39ff14] bg-[#39ff14]/10 shadow-[0_0_8px_rgba(57,255,20,0.3)] transition-transform hover:scale-105"><i class="fas fa-dragon mr-1"></i> Hắc Long</span>
+                <span class="px-3 py-1 text-xs font-semibold rounded-full border border-purple-500/50 text-purple-400 bg-purple-500/10 shadow-[0_0_8px_rgba(168,85,247,0.3)] transition-transform hover:scale-105"><i class="fas fa-gamepad mr-1"></i> Gamer</span>
+            </div>
+
+            <div class="w-full flex flex-col gap-3">
+                <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" class="relative group flex items-center justify-center w-full py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fab fa-facebook text-blue-500 text-xl absolute left-6 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide">Facebook</span>
+                </a>
+                
+                <a href="http://zaloapp.com/qr/p/1409r842vh1p1" target="_blank" class="relative group flex items-center justify-center w-full py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fas fa-comment-dots text-sky-400 text-xl absolute left-6 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide">Zalo</span>
+                </a>
+                
+                <a href="https://t.me/tlios_alex" target="_blank" class="relative group flex items-center justify-center w-full py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fab fa-telegram plane text-cyan-500 text-xl absolute left-6 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide">Telegram</span>
+                </a>
+
+                <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK" target="_blank" class="relative group flex items-center justify-center w-full py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-pink-500/10 hover:border-pink-500/50 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-300 overflow-hidden shadow-sm">
+                    <i class="fab fa-tiktok text-white group-hover:text-pink-500 text-xl absolute left-6 group-hover:scale-125 transition-transform"></i>
+                    <span class="font-medium tracking-wide">TikTok</span>
+                </a>
+            </div>
+            
+            <!-- BỘ ĐẾM NGƯỜI TRUY CẬP (VISITOR COUNTER) -->
+            <div class="mt-6 px-5 py-2 bg-black/40 border border-cyan-500/30 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                <i class="fas fa-eye text-cyan-400 animate-pulse"></i>
+                <span class="text-sm text-gray-300 font-medium">Lượt truy cập:</span>
+                <span id="visitor-count" class="font-bold text-cyan-400 tracking-wider">4,560</span>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 text-xs text-gray-500 tracking-wider">
+                © Thiên Long Ios
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Thư viện VanillaTilt 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    
+    <script>
+        // ---------------------------------------------------
+        // 1. VANILLA TILT & GÕ CHỮ & BỘ ĐẾM (COUNTER)
+        // ---------------------------------------------------
+        VanillaTilt.init(document.querySelector("#tilt-box"), {
+            max: 5, speed: 400, glare: true, "max-glare": 0.2, gyroscope: true
+        });
+
+        const text = "ĐẸP TRAI VÀ ĐẲNG CẤP";
+        let textIndex = 0;
+        function typeWriter() {
+            if (textIndex < text.length) {
+                document.getElementById("typing-text").innerHTML += text.charAt(textIndex);
+                textIndex++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+        window.onload = () => {
+            typeWriter();
+            initVisitorCounter();
+        };
+
+        // --- BỘ ĐẾM NGƯỜI TRUY CẬP ---
+        function initVisitorCounter() {
+            let countObj = localStorage.getItem('tlios_visitors');
+            let count = 4560; // Số bắt đầu
+            
+            if (countObj) {
+                count = parseInt(countObj) + 1; // Mỗi lần load trang là +1
+            }
+            localStorage.setItem('tlios_visitors', count);
+            
+            const countDisplay = document.getElementById('visitor-count');
+            countDisplay.innerText = count.toLocaleString();
+
+            // Hiệu ứng "nhảy số" giả lập người đang vào live
+            setInterval(() => {
+                if (Math.random() > 0.6) { // Tỉ lệ 40% sẽ nhảy số mỗi 6 giây
+                    count++;
+                    localStorage.setItem('tlios_visitors', count);
+                    countDisplay.innerText = count.toLocaleString();
+                }
+            }, 6000);
+        }
+
+        // ---------------------------------------------------
+        // 2. HIỆU ỨNG TUYẾT RƠI (Chỉ rơi thẳng)
+        // ---------------------------------------------------
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 2 + 1,
+                speed: Math.random() * 1 + 0.5
+            });
+        }
+
+        function drawSnow() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.beginPath();
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+            updateSnow();
+            requestAnimationFrame(drawSnow);
+        }
+
+        function updateSnow() {
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.y += p.speed;
+                if (p.y > height) {
+                    p.y = -10; // Đưa lên lại đỉnh
+                    
+                    // Sửa lỗi các hạt xếp hàng dọc sát mép khi thu nhỏ trình duyệt
+                    if (width > 0) {
+                        // random vị trí X nhưng cách mép màn hình 5px để không bị dính
+                        p.x = Math.max(5, Math.min(width - 5, Math.random() * width));
+                    }
+                }
+            }
+        }
+        drawSnow();
+
+        
+        // --- BỘ ĐẾM NGƯỜI TRUY CẬP ---
+        let countObj = localStorage.getItem('tlios_visitors');
+        let count = 4560; 
+        if (countObj) count = parseInt(countObj) + 1;
+        localStorage.setItem('tlios_visitors', count);
+        
+        const countDisplay = document.getElementById('visitor-count');
+        if(countDisplay) countDisplay.innerText = count.toLocaleString();
+
+        setInterval(() => {
+            if (Math.random() > 0.6) {
+                count++;
+                localStorage.setItem('tlios_visitors', count);
+                if(countDisplay) countDisplay.innerText = count.toLocaleString();
+            }
+        }, 6000);
+    </script>
+</body>
+</html>
