@@ -4,175 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Thiên Long IOS - Bio</title>
-
-    <!-- SEO & Open Graph -->
-    <meta name="description" content="Thiên Long IOS — iOS Developer, Hắc Long, Gamer. Kết nối qua Facebook, Zalo, Telegram, TikTok.">
-    <meta name="author" content="Thiên Long IOS">
-    <meta name="theme-color" content="#050505">
-
-    <!-- Open Graph (Facebook, Zalo, Messenger) -->
-    <meta property="og:type" content="profile">
-    <meta property="og:title" content="Thiên Long IOS — Bio">
-    <meta property="og:description" content="iOS Developer · Hắc Long · Gamer — Đẹp trai và đẳng cấp ✨">
-    <meta property="og:image" content="./6686ae04340f0125502a1fc08bf482da.jpg">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="Thiên Long IOS">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Thiên Long IOS — Bio">
-    <meta name="twitter:description" content="iOS Developer · Hắc Long · Gamer">
-    <meta name="twitter:image" content="./6686ae04340f0125502a1fc08bf482da.jpg">
-
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #050505;
         }
-        .font-serif { font-family: 'Playfair Display', serif; }
-
-        /* ============================================
-           GLASS CARD
-           ============================================ */
-        .glass-card-main {
-            background: rgba(10, 10, 10, 0.08);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+        
+        .font-serif {
+            font-family: 'Playfair Display', serif;
         }
 
-        /* ============================================
-           3D CONTENT LAYERS
-           ============================================ */
+        /* Lớp kính chính mặt trước - Đã giảm tối đa màu đen và độ nhòe để nhìn rõ nền */
+        .glass-card-main {
+            background: rgba(10, 10, 10, 0.08); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* 3D Content Layers - Cấu trúc không gian khối hộp */
         .layer-1 { transform: translateZ(40px); }
         .layer-2 { transform: translateZ(70px); filter: drop-shadow(0 8px 10px rgba(0,0,0,0.6)); }
         .layer-3 { transform: translateZ(100px); filter: drop-shadow(0 12px 15px rgba(0,0,0,0.8)); }
 
-        /* ============================================
-           ANIMATED GRADIENT BORDER (Holographic)
-           ============================================ */
-        @property --border-angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
+        /* Hiệu ứng LED 7 màu RGB cực mượt cho Avatar phụ */
+        @keyframes rgb-led-glow {
+            0% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
+            15% { border-color: #ff7f00; box-shadow: 0 0 15px rgba(255, 127, 0, 0.8); }
+            33% { border-color: #ffff00; box-shadow: 0 0 15px rgba(255, 255, 0, 0.8); }
+            50% { border-color: #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); }
+            66% { border-color: #0000ff; box-shadow: 0 0 15px rgba(0, 0, 255, 0.8); }
+            83% { border-color: #4b0082; box-shadow: 0 0 15px rgba(75, 0, 130, 0.8); }
+            100% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
         }
-        @keyframes rotateBorder {
-            to { --border-angle: 360deg; }
-        }
-        .holo-border {
-            position: relative;
-        }
-        .holo-border::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 2.1rem;
-            padding: 2px;
-            background: conic-gradient(
-                from var(--border-angle),
-                #ff6ec7 0%,
-                #7b68ee 15%,
-                #00d4ff 30%,
-                #39ff14 45%,
-                #ffd700 60%,
-                #ff6ec7 75%,
-                #7b68ee 90%,
-                #ff6ec7 100%
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: rotateBorder 4s linear infinite;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.85;
-            filter: blur(0.5px);
-        }
-        /* Outer glow that follows the gradient */
-        .holo-border::after {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 2.3rem;
-            background: conic-gradient(
-                from var(--border-angle),
-                rgba(255,110,199,0.15) 0%,
-                rgba(123,104,238,0.15) 25%,
-                rgba(0,212,255,0.15) 50%,
-                rgba(57,255,20,0.1) 75%,
-                rgba(255,110,199,0.15) 100%
-            );
-            animation: rotateBorder 4s linear infinite;
-            filter: blur(12px);
-            pointer-events: none;
-            z-index: 0;
+        .rgb-led-border {
+            border: 2.5px solid #ff0000;
+            animation: rgb-led-glow 3s linear infinite; /* 3s một vòng sáng, mượt mà */
         }
 
-        /* ============================================
-           AVATAR SPINNING GRADIENT RING
-           ============================================ */
-        @keyframes ringRotate {
-            to { transform: rotate(360deg); }
-        }
-        .avatar-ring-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .avatar-ring {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            padding: 3px;
-            background: conic-gradient(
-                from 0deg,
-                #ff6ec7,
-                #7b68ee,
-                #00d4ff,
-                #39ff14,
-                #ffd700,
-                #ff6ec7
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: ringRotate 3s linear infinite;
-            z-index: 5;
-        }
-        .avatar-ring-glow {
-            position: absolute;
-            inset: -10px;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                rgba(255,110,199,0.2),
-                rgba(123,104,238,0.2),
-                rgba(0,212,255,0.2),
-                rgba(57,255,20,0.15),
-                rgba(255,110,199,0.2)
-            );
-            animation: ringRotate 3s linear infinite;
-            filter: blur(10px);
-            z-index: 4;
-            pointer-events: none;
-        }
-
-        /* ============================================
-           FOUR-POINT STAR FALL (around avatar)
-           ============================================ */
+        /* Hiệu ứng sao 4 cánh rơi quanh Avatar chính */
         @keyframes starFall {
-            0%   { transform: translateY(-15px) rotate(0deg) scale(0); opacity: 0; }
-            20%  { opacity: 1; transform: translateY(10px) rotate(45deg) scale(1.2); }
-            70%  { opacity: 1; transform: translateY(50px) rotate(90deg) scale(1); }
+            0% { transform: translateY(-15px) rotate(0deg) scale(0); opacity: 0; }
+            20% { opacity: 1; transform: translateY(10px) rotate(45deg) scale(1.2); }
+            70% { opacity: 1; transform: translateY(50px) rotate(90deg) scale(1); }
             100% { transform: translateY(90px) rotate(180deg) scale(0); opacity: 0; }
         }
         .four-point-star {
@@ -186,9 +67,6 @@
             z-index: 30;
         }
 
-        /* ============================================
-           TYPING CURSOR
-           ============================================ */
         .cursor {
             display: inline-block;
             width: 2px;
@@ -197,95 +75,20 @@
             margin-left: 2px;
         }
         @keyframes blink { 50% { opacity: 0; } }
-
-        /* ============================================
-           STAGGER REVEAL for social buttons
-           ============================================ */
-        @keyframes revealUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px) scale(0.95);
-                filter: blur(4px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
-        }
-        .social-btn {
-            opacity: 0;
-            animation: revealUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .social-btn:nth-child(1) { animation-delay: 0.8s; }
-        .social-btn:nth-child(2) { animation-delay: 1.0s; }
-        .social-btn:nth-child(3) { animation-delay: 1.2s; }
-        .social-btn:nth-child(4) { animation-delay: 1.4s; }
-
-        /* Hover glow per-brand */
-        .social-btn.facebook:hover { background: rgba(24, 119, 242, 0.2); border-color: rgba(24, 119, 242, 0.8); box-shadow: 0 0 25px rgba(24, 119, 242, 0.5), 0 0 60px rgba(24, 119, 242, 0.15); transform: translateY(-3px) scale(1.02); }
-        .social-btn.zalo:hover     { background: rgba(0, 104, 255, 0.2); border-color: rgba(0, 104, 255, 0.8); box-shadow: 0 0 25px rgba(0, 104, 255, 0.5), 0 0 60px rgba(0, 104, 255, 0.15); transform: translateY(-3px) scale(1.02); }
-        .social-btn.telegram:hover { background: rgba(14, 165, 233, 0.2); border-color: rgba(14, 165, 233, 0.8); box-shadow: 0 0 25px rgba(14, 165, 233, 0.5), 0 0 60px rgba(14, 165, 233, 0.15); transform: translateY(-3px) scale(1.02); }
-        .social-btn.tiktok:hover   { background: rgba(236, 72, 153, 0.2); border-color: rgba(236, 72, 153, 0.8); box-shadow: 0 0 25px rgba(236, 72, 153, 0.5), 0 0 60px rgba(236, 72, 153, 0.15); transform: translateY(-3px) scale(1.02); }
-        .social-btn:active { transform: translateY(0) scale(0.98) !important; }
-
-        /* ============================================
-           CARD ENTRANCE
-           ============================================ */
-        @keyframes cardEntrance {
-            0%   { opacity: 0; transform: translateY(40px) scale(0.92); filter: blur(8px); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
-        .card-entrance {
-            animation: cardEntrance 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ============================================
-           BADGE ENTRANCE
-           ============================================ */
-        @keyframes badgePop {
-            0%   { opacity: 0; transform: scale(0.5); }
-            60%  { transform: scale(1.1); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .badge-anim {
-            opacity: 0;
-            animation: badgePop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        .badge-anim:nth-child(1) { animation-delay: 0.5s; }
-        .badge-anim:nth-child(2) { animation-delay: 0.65s; }
-        .badge-anim:nth-child(3) { animation-delay: 0.8s; }
+        /* Hover Effects for Social Buttons */
+        .social-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .social-btn.facebook:hover { background: rgba(24, 119, 242, 0.2); border-color: rgba(24, 119, 242, 0.8); box-shadow: 0 0 25px rgba(24, 119, 242, 0.6); transform: translateY(-2px); }
+        .social-btn.zalo:hover { background: rgba(0, 104, 255, 0.2); border-color: rgba(0, 104, 255, 0.8); box-shadow: 0 0 25px rgba(0, 104, 255, 0.6); transform: translateY(-2px); }
+        .social-btn.telegram:hover { background: rgba(14, 165, 233, 0.2); border-color: rgba(14, 165, 233, 0.8); box-shadow: 0 0 25px rgba(14, 165, 233, 0.6); transform: translateY(-2px); }
+        .social-btn.tiktok:hover { background: rgba(236, 72, 153, 0.2); border-color: rgba(236, 72, 153, 0.8); box-shadow: 0 0 25px rgba(236, 72, 153, 0.6); transform: translateY(-2px); }
 
-        /* ============================================
-           STATUS PULSE
-           ============================================ */
-        @keyframes statusGlow {
-            0%, 100% { box-shadow: 0 0 4px rgba(52, 211, 153, 0.4); }
-            50%      { box-shadow: 0 0 12px rgba(52, 211, 153, 0.8); }
-        }
-        .status-badge {
-            animation: statusGlow 2s ease-in-out infinite;
-        }
-
-        /* ============================================
-           VISITOR COUNTER ANIMATION
-           ============================================ */
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .count-reveal {
-            animation: countUp 0.5s ease-out forwards;
-            animation-delay: 1.8s;
-            opacity: 0;
-        }
-
-        /* ============================================
-           ACCESSIBILITY
-           ============================================ */
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
+            * {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
@@ -296,237 +99,181 @@
 </head>
 
 <body class="overflow-x-hidden bg-[#050505] text-white selection:bg-cyan-500 selection:text-white relative min-h-screen">
-
-    <!-- ==================== BACKGROUND VIDEO ==================== -->
-    <video autoplay loop muted playsinline
-           poster="./6686ae04340f0125502a1fc08bf482da.jpg"
-           class="fixed inset-0 w-full h-full object-cover opacity-70 pointer-events-none z-0"
+    
+    <!-- Background Video Động (Cyberpunk/Halo) -->
+    <video autoplay loop muted playsinline 
+           class="fixed inset-0 w-full h-full object-cover opacity-70 pointer-events-none z-0" 
            style="filter: brightness(0.8);">
+        <!-- Bạn tải video về, đổi tên thành background.mp4 và đẩy lên github nhé -->
         <source src="./background.mp4" type="video/mp4">
     </video>
-
+    
     <!-- Dark Gradient Overlay -->
-    <div class="fixed inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none z-[1]"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none"></div>
+    
+    <!-- Canvas for Snow Effect -->
+    <canvas id="snow-canvas" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
 
-    <!-- Snow Canvas -->
-    <canvas id="snow-canvas" class="fixed inset-0 z-[2] pointer-events-none" aria-hidden="true"></canvas>
-
-    <!-- ==================== GYROSCOPE BANNER (iOS 13+) ==================== -->
+    <!-- Gyroscope Permission Prompt for iOS 13+ -->
     <header id="gyro-banner" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden">
-        <button id="gyro-permission-btn"
-                aria-label="Bật hiệu ứng nghiêng 3D"
-                class="text-[11px] px-4 py-2 rounded-full text-cyan-300 backdrop-blur-md shadow-lg flex items-center gap-2 cursor-pointer bg-white/10 border border-cyan-500/50 hover:bg-white/20 transition-all">
+        <button id="gyro-permission-btn" onclick="requestGyroPermission()" aria-label="Bật hiệu ứng nghiêng 3D" class="text-[11px] px-4 py-2 rounded-full text-cyan-300 backdrop-blur-md shadow-lg flex items-center gap-2 cursor-pointer bg-white/10 border border-cyan-500/50 hover:bg-white/20 transition-all">
             <i class="fas fa-compass animate-spin"></i> Bật hiệu ứng nghiêng 3D
         </button>
     </header>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
+    <!-- Main Content Container -->
     <main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-6 pointer-events-none">
+        
+        <!-- 3D TILT BOX (Khối hộp 3D trong suốt) -->
+        <section id="tilt-box" class="relative w-[90%] max-w-[320px] rounded-[2rem] p-5 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out] pointer-events-auto bg-transparent" style="transform-style: preserve-3d;">
+            
+            <!-- Các lớp kính nền phát sáng (Trong suốt 100%, chỉ giữ hào quang) -->
+            <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none" 
+                 style="transform: translateZ(-90px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);"></div>
+                 
+            <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none" 
+                 style="transform: translateZ(-60px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);"></div>
+                 
+            <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none" 
+                 style="transform: translateZ(-30px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);"></div>
+                 
+            <!-- Lớp mặt kính trước siêu trong suốt -->
+            <div class="absolute inset-0 rounded-[2rem] glass-card-main pointer-events-none" 
+                 style="transform: translateZ(0px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 35px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);"></div>
 
-        <!-- 3D TILT CARD -->
-        <section id="tilt-box"
-                 class="holo-border relative w-[90%] max-w-[320px] rounded-[2rem] p-5 flex flex-col items-center pointer-events-auto bg-transparent card-entrance"
-                 style="transform-style: preserve-3d; perspective: 800px;">
-
-            <!-- ====== 3D BOX DEPTH LAYERS ====== -->
-            <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none"
-                 style="transform: translateZ(-90px); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 0 8px rgba(255,255,255,0.1);"></div>
-            <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none"
-                 style="transform: translateZ(-60px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.2);"></div>
-            <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none"
-                 style="transform: translateZ(-30px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 0 20px rgba(255,255,255,0.4);"></div>
-            <div class="absolute inset-0 rounded-[2rem] glass-card-main pointer-events-none"
-                 style="transform: translateZ(0px); border: 1px solid rgba(255,255,255,0.25); box-shadow: 0 0 25px rgba(255,255,255,0.3), inset 0 0 15px rgba(255,255,255,0.1);"></div>
-            <!-- ====== END DEPTH LAYERS ====== -->
-
-            <!-- ==================== AVATAR ==================== -->
-            <div class="layer-3 w-full flex flex-col items-center relative z-10">
-                <div class="relative mb-3 group">
-                    <!-- Soft ambient glow behind avatar -->
-                    <div class="absolute inset-0 rounded-full blur-xl opacity-40 transition duration-500"
-                         style="background: radial-gradient(circle, rgba(255,110,199,0.5), rgba(123,104,238,0.3), transparent 70%);"></div>
-
-                    <!-- Star particles container -->
-                    <div id="avatar-stars-container" class="absolute inset-[-30px] pointer-events-none overflow-hidden rounded-full z-20"></div>
-
-                    <!-- Spinning gradient ring -->
-                    <div class="avatar-ring-wrapper">
-                        <div class="avatar-ring-glow"></div>
-                        <div class="avatar-ring"></div>
-                        <img id="avatar-img"
-                             src="./6686ae04340f0125502a1fc08bf482da.jpg"
-                             onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=TL'"
-                             alt="Avatar Thiên Long IOS"
-                             loading="eager"
-                             decoding="async"
-                             class="relative w-24 h-24 rounded-full object-cover z-10 transition-transform duration-300 group-hover:scale-110"
-                             style="box-shadow: 0 0 20px rgba(255,255,255,0.5);">
-                    </div>
+            <!-- Avatar Section (Chứa 2 Avatar) -->
+            <div class="layer-3 w-full flex justify-center items-center gap-4 relative z-10 mb-2">
+                
+                <!-- Avatar Phụ (Bên trái) - Viền LED 7 màu -->
+                <div class="relative group flex-shrink-0">
+                    <img crossorigin="anonymous" 
+                         src="./friend.png" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/200x200/222/fff?text=Bạn'" 
+                         alt="Avatar Bạn" 
+                         loading="lazy" 
+                         class="relative w-[70px] h-[70px] rounded-full object-cover z-10 transition-transform duration-300 group-hover:scale-110 rgb-led-border">
                 </div>
+
+                <!-- Avatar Chính (Thiên Long IOS - Bên phải) -->
+                <div class="relative group flex-shrink-0">
+                    <div class="absolute inset-0 rounded-full blur-xl opacity-50 transition duration-500" style="background-color: rgba(255, 255, 255, 0.8);"></div>
+                    <div id="avatar-stars-container" class="absolute inset-[-30px] pointer-events-none overflow-hidden rounded-full z-20"></div>
+                    <img id="avatar-img" crossorigin="anonymous" 
+                         src="./6686ae04340f0125502a1fc08bf482da.jpg" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" 
+                         alt="Avatar Chính" 
+                         loading="lazy" 
+                         decoding="async"
+                         class="relative w-24 h-24 rounded-full object-cover z-10 transition-transform duration-300 group-hover:scale-110" 
+                         style="border: 2px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);">
+                </div>
+
             </div>
 
-            <!-- ==================== NAME & INFO ==================== -->
-            <div class="layer-2 w-full flex flex-col items-center relative z-10">
+            <!-- Name and Info -->
+            <div class="layer-2 w-full flex flex-col items-center relative z-10 mt-2">
                 <header class="flex items-center justify-center gap-1.5 mt-1 w-full whitespace-nowrap">
                     <h1 class="text-[1.4rem] font-bold italic font-serif tracking-wide text-white drop-shadow-lg">
                         Thiên Long IOS
                     </h1>
-                    <div class="relative flex items-center justify-center hover:scale-125 transition-transform duration-300">
-                        <span class="text-[18px] animate-pulse" aria-hidden="true"
-                              style="filter: drop-shadow(0 0 12px rgba(255, 105, 180, 1));">🌸</span>
+                    <div class="relative flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                        <span class="text-[18px] animate-pulse" aria-hidden="true" style="filter: drop-shadow(0 0 12px rgba(255, 105, 180, 1));">🌸</span>
                     </div>
                 </header>
 
-                <!-- Typing effect -->
                 <div class="typing-container mb-2 mt-1 w-full text-center" aria-label="Khẩu hiệu">
-                    <span id="typing-text" class="text-gray-300 text-[9px] tracking-[0.2em] uppercase font-semibold"></span>
-                    <span class="cursor" aria-hidden="true">|</span>
+                    <span id="typing-text" class="text-gray-300 text-[9px] tracking-[0.2em] uppercase font-semibold"></span><span class="cursor" aria-hidden="true">|</span>
                 </div>
 
-                <!-- Online status -->
-                <div class="status-badge flex items-center gap-1.5 mb-3 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[9px] text-emerald-400 font-medium" role="status">
+                <div class="flex items-center gap-1.5 mb-3 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[9px] text-emerald-400 font-medium" role="status">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     <span>System Online • Active</span>
                 </div>
 
-                <!-- Skill badges with pop animation -->
                 <div class="flex flex-wrap justify-center gap-1.5 mb-5 w-full">
-                    <span class="badge-anim px-2 py-0.5 text-[9px] font-semibold rounded-full border border-sky-500/50 text-sky-400 bg-sky-500/10 shadow-[0_0_8px_rgba(14,165,233,0.4)]">
-                        <i class="fas fa-laptop-code mr-1"></i> iOS Dev
-                    </span>
-                    <span class="badge-anim px-2 py-0.5 text-[9px] font-semibold rounded-full border border-[#39ff14]/50 text-[#39ff14] bg-[#39ff14]/10 shadow-[0_0_8px_rgba(57,255,20,0.4)]">
-                        <i class="fas fa-dragon mr-1"></i> Hắc Long
-                    </span>
-                    <span class="badge-anim px-2 py-0.5 text-[9px] font-semibold rounded-full border border-purple-500/50 text-purple-400 bg-purple-500/10 shadow-[0_0_8px_rgba(168,85,247,0.4)]">
-                        <i class="fas fa-gamepad mr-1"></i> Gamer
-                    </span>
+                    <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-sky-500/50 text-sky-400 bg-sky-500/10 shadow-[0_0_8px_rgba(14,165,233,0.4)]"><i class="fas fa-laptop-code mr-1"></i> iOS Dev</span>
+                    <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-[#39ff14]/50 text-[#39ff14] bg-[#39ff14]/10 shadow-[0_0_8px_rgba(57,255,20,0.4)]"><i class="fas fa-dragon mr-1"></i> Hắc Long</span>
+                    <span class="px-2 py-0.5 text-[9px] font-semibold rounded-full border border-purple-500/50 text-purple-400 bg-purple-500/10 shadow-[0_0_8px_rgba(168,85,247,0.4)]"><i class="fas fa-gamepad mr-1"></i> Gamer</span>
                 </div>
             </div>
 
-            <!-- ==================== SOCIAL LINKS ==================== -->
+            <!-- Social Links -->
             <div class="layer-1 w-full relative z-10">
                 <nav class="w-full flex flex-col gap-3" aria-label="Mạng xã hội">
-
-                    <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr"
-                       target="_blank" rel="noopener noreferrer"
-                       aria-label="Mở Facebook của Thiên Long IOS"
-                       class="social-btn facebook relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    
+                    <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Mở Facebook của Thiên Long IOS" class="social-btn facebook relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fab fa-facebook text-blue-500 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
-                        <span class="font-semibold tracking-wider text-xs">Facebook</span>
+                        <span class="font-medium tracking-wider text-xs">Facebook</span>
                     </a>
-
-                    <a href="http://zaloapp.com/qr/p/1409r842vh1p1"
-                       target="_blank" rel="noopener noreferrer"
-                       aria-label="Mở Zalo"
-                       class="social-btn zalo relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    
+                    <a href="http://zaloapp.com/qr/p/1409r842vh1p1" target="_blank" rel="noopener noreferrer" aria-label="Mở Zalo" class="social-btn zalo relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fas fa-comment-dots text-blue-400 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
-                        <span class="font-semibold tracking-wider text-xs">Zalo</span>
+                        <span class="font-medium tracking-wider text-xs">Zalo</span>
                     </a>
 
-                    <a href="#"
-                       target="_blank" rel="noopener noreferrer"
-                       aria-label="Mở Telegram"
-                       class="social-btn telegram relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Mở Telegram" class="social-btn telegram relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fab fa-telegram text-cyan-400 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
-                        <span class="font-semibold tracking-wider text-xs">Telegram</span>
+                        <span class="font-medium tracking-wider text-xs">Telegram</span>
                     </a>
-
-                    <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK"
-                       target="_blank" rel="noopener noreferrer"
-                       aria-label="Mở TikTok"
-                       class="social-btn tiktok relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    
+                    <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK" target="_blank" rel="noopener noreferrer" aria-label="Mở TikTok" class="social-btn tiktok relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fab fa-tiktok text-white group-hover:text-pink-500 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
-                        <span class="font-semibold tracking-wider text-xs">TikTok</span>
+                        <span class="font-medium tracking-wider text-xs">TikTok</span>
                     </a>
 
                 </nav>
             </div>
-
-            <!-- ==================== FOOTER ==================== -->
+            
+            <!-- Footer -->
             <footer class="mt-5 flex flex-col items-center gap-1.5 layer-1 relative z-10">
-                <div class="count-reveal text-[10px] text-gray-400 tracking-wider flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/10 shadow-inner"
-                     aria-label="Số lượt truy cập">
-                    <i class="fas fa-eye text-cyan-400" aria-hidden="true"></i>
-                    Truy cập: <span id="visitor-count" class="font-bold text-cyan-300">—</span>
+                <div class="text-[10px] text-gray-400 tracking-wider flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/10 shadow-inner" aria-label="Số lượt truy cập">
+                    <i class="fas fa-eye text-cyan-400" aria-hidden="true"></i> Truy cập: <span id="visitor-count" class="font-bold text-cyan-300"></span>
                 </div>
-                <div class="text-[9px] text-gray-500 tracking-wider mt-0.5">
-                    © Thiên Long IOS
+                <div class="text-[9px] text-gray-500 tracking-wider">
+                    © Thiên Long Ios
                 </div>
             </footer>
-
         </section>
     </main>
 
-    <!-- VanillaTilt -->
+    <!-- VanillaTilt 3D Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-
+    
     <script>
-    (function() {
-        'use strict';
-
-        // ==========================================
-        // AVATAR STAR PARTICLES (Fixed memory leak)
-        // ==========================================
-        let starIntervalId = null;
-
         function initAvatarStars() {
             const container = document.getElementById('avatar-stars-container');
             if (!container) return;
-
-            // Clear any previous interval
-            if (starIntervalId) clearInterval(starIntervalId);
-
-            starIntervalId = setInterval(() => {
-                // Pause when tab is hidden
+            setInterval(() => {
                 if (document.hidden) return;
-
-                // Limit max concurrent stars to prevent DOM bloat
-                if (container.children.length >= 8) return;
-
                 const star = document.createElement('div');
                 star.classList.add('four-point-star');
-                star.style.left = (Math.random() * 100) + '%';
-                star.style.top = '-15px';
-                const scale = Math.random() * 0.5 + 0.8;
-                star.style.transform = 'scale(' + scale + ')';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `-15px`;
+                star.style.transform = `scale(${Math.random() * 0.5 + 0.8})`;
                 container.appendChild(star);
-
-                // Self-cleanup after animation ends
-                star.addEventListener('animationend', () => star.remove(), { once: true });
-            }, 350);
+                setTimeout(() => { if (container.contains(star)) star.remove(); }, 2000);
+            }, 300);
         }
 
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', () => {
-            if (starIntervalId) clearInterval(starIntervalId);
-        });
-
-        // ==========================================
-        // 3D TILT INITIALIZATION
-        // ==========================================
-        let tiltInstance = null;
-
+        let tiltInstance;
         function initTilt() {
-            const el = document.getElementById('tilt-box');
-            if (!el || typeof VanillaTilt === 'undefined') return;
+            const tiltElement = document.querySelector("#tilt-box");
+            if (!tiltElement) return;
             if (tiltInstance) tiltInstance.destroy();
-
-            VanillaTilt.init(el, {
+            VanillaTilt.init(tiltElement, {
                 max: 22,
                 speed: 400,
                 glare: true,
-                'max-glare': 0.12,
+                "max-glare": 0.12, 
                 scale: 1.05,
                 gyroscope: true
             });
-            tiltInstance = el.vanillaTilt;
+            tiltInstance = tiltElement.vanillaTilt;
         }
 
-        // Gyroscope permission for iOS 13+
-        window.requestGyroPermission = function() {
-            if (typeof DeviceOrientationEvent !== 'undefined' &&
-                typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission().then(function(response) {
+        function requestGyroPermission() {
+            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission().then(response => {
                     if (response === 'granted') {
                         document.getElementById('gyro-banner').style.display = 'none';
                         initTilt();
@@ -535,201 +282,63 @@
             } else {
                 document.getElementById('gyro-banner').style.display = 'none';
             }
-        };
-
-        // Attach click handler
-        var gyroBtn = document.getElementById('gyro-permission-btn');
-        if (gyroBtn) gyroBtn.addEventListener('click', window.requestGyroPermission);
-
-        // ==========================================
-        // TYPING EFFECT (with loop)
-        // ==========================================
-        const TYPING_TEXT = 'ĐẸP TRAI VÀ ĐẲNG CẤP';
-        const TYPING_SPEED = 120;
-        const PAUSE_BEFORE_DELETE = 2500;
-        const DELETE_SPEED = 60;
-        const PAUSE_BEFORE_RETYPE = 800;
-
-        function initTyping() {
-            const el = document.getElementById('typing-text');
-            if (!el) return;
-
-            let charIndex = 0;
-            let isDeleting = false;
-
-            function tick() {
-                if (document.hidden) {
-                    setTimeout(tick, 200);
-                    return;
-                }
-
-                if (!isDeleting) {
-                    // Typing forward
-                    el.textContent = TYPING_TEXT.substring(0, charIndex + 1);
-                    charIndex++;
-                    if (charIndex >= TYPING_TEXT.length) {
-                        isDeleting = true;
-                        setTimeout(tick, PAUSE_BEFORE_DELETE);
-                        return;
-                    }
-                    setTimeout(tick, TYPING_SPEED);
-                } else {
-                    // Deleting
-                    el.textContent = TYPING_TEXT.substring(0, charIndex - 1);
-                    charIndex--;
-                    if (charIndex <= 0) {
-                        isDeleting = false;
-                        setTimeout(tick, PAUSE_BEFORE_RETYPE);
-                        return;
-                    }
-                    setTimeout(tick, DELETE_SPEED);
-                }
-            }
-
-            // Start after card entrance
-            setTimeout(tick, 600);
         }
 
-        // ==========================================
-        // VISITOR COUNTER (API-based, fallback localStorage)
-        // ==========================================
+        const text = "ĐẸP TRAI VÀ ĐẲNG CẤP";
+        let textIndex = 0;
+        function typeWriter() {
+            const el = document.getElementById("typing-text");
+            if (el && textIndex < text.length) {
+                el.innerHTML += text.charAt(textIndex++);
+                setTimeout(typeWriter, 120);
+            }
+        }
+
+        function safeLocalStorageGet(key, fallback) {
+            try { const val = localStorage.getItem(key); return val !== null ? JSON.parse(val) : fallback; } catch { return fallback; }
+        }
+        function safeLocalStorageSet(key, value) {
+            try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+        }
         function initVisitorCounter() {
-            const display = document.getElementById('visitor-count');
-            if (!display) return;
-
-            // Try real counter API first
-            var namespace = 'thienlong-ios-bio';
-            var key = 'visits';
-            var apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
-
-            fetch(apiUrl)
-                .then(function(res) { return res.json(); })
-                .then(function(data) {
-                    if (data && typeof data.value === 'number') {
-                        animateCounter(display, data.value);
-                    } else {
-                        fallbackCounter(display);
-                    }
-                })
-                .catch(function() {
-                    fallbackCounter(display);
-                });
+            let count = safeLocalStorageGet('tlios_visitors', 5125);
+            if (typeof count === 'number') count++;
+            safeLocalStorageSet('tlios_visitors', count);
+            const disp = document.getElementById('visitor-count');
+            if (disp) disp.innerText = count.toLocaleString();
         }
 
-        function fallbackCounter(display) {
-            // Fallback: localStorage
-            var count = 0;
-            try {
-                count = parseInt(localStorage.getItem('tlios_visitors') || '0', 10);
-                count++;
-                localStorage.setItem('tlios_visitors', String(count));
-            } catch (e) {
-                count = 1;
-            }
-            animateCounter(display, count);
-        }
-
-        function animateCounter(el, target) {
-            var current = 0;
-            var step = Math.max(1, Math.floor(target / 40));
-            var timer = setInterval(function() {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                el.textContent = current.toLocaleString();
-            }, 30);
-        }
-
-        // ==========================================
-        // SNOW EFFECT (optimized)
-        // ==========================================
+        let snowAnimationFrame;
         function initSnow() {
-            var canvas = document.getElementById('snow-canvas');
-            if (!canvas) return;
-            var ctx = canvas.getContext('2d');
-            if (!ctx) return;
-
-            var width, height;
-            var particles = [];
-            var PARTICLE_COUNT = 60;
-            var animFrame;
-
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
+            const canvas = document.getElementById('snow-canvas');
+            const ctx = canvas ? canvas.getContext('2d') : null;
+            if (!canvas || !ctx) return;
+            let width, height, particles = [];
+            function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resizeCanvas); resizeCanvas();
+            for (let i = 0; i < 70; i++) particles.push({ x: Math.random() * width, y: Math.random() * height, r: Math.random() * 2 + 1, speed: Math.random() * 1 + 0.5 });
+            function drawSnow() {
+                if (document.hidden) { cancelAnimationFrame(snowAnimationFrame); return; }
+                ctx.clearRect(0, 0, width, height); ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'; ctx.beginPath();
+                particles.forEach(p => { ctx.moveTo(p.x, p.y); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true); });
+                ctx.fill(); updateSnow(); snowAnimationFrame = requestAnimationFrame(drawSnow);
             }
-            window.addEventListener('resize', resize);
-            resize();
-
-            // Create particles
-            for (var i = 0; i < PARTICLE_COUNT; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    r: Math.random() * 2 + 0.8,
-                    speed: Math.random() * 0.8 + 0.3,
-                    drift: (Math.random() - 0.5) * 0.3,
-                    opacity: Math.random() * 0.4 + 0.3
+            function updateSnow() {
+                particles.forEach(p => {
+                    p.y += p.speed;
+                    if (p.y > height) { p.y = -10; p.x = Math.random() * width; }
                 });
             }
-
-            function draw() {
-                ctx.clearRect(0, 0, width, height);
-
-                for (var i = 0; i < particles.length; i++) {
-                    var p = particles[i];
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255, 255, 255, ' + p.opacity + ')';
-                    ctx.fill();
-
-                    // Update
-                    p.y += p.speed;
-                    p.x += p.drift;
-
-                    if (p.y > height + 5) {
-                        p.y = -5;
-                        p.x = Math.random() * width;
-                    }
-                    if (p.x > width + 5) p.x = -5;
-                    if (p.x < -5) p.x = width + 5;
-                }
-
-                animFrame = requestAnimationFrame(draw);
-            }
-
-            // Pause when tab hidden
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    cancelAnimationFrame(animFrame);
-                } else {
-                    animFrame = requestAnimationFrame(draw);
-                }
-            });
-
-            draw();
+            document.addEventListener('visibilitychange', () => { if (!document.hidden) snowAnimationFrame = requestAnimationFrame(drawSnow); });
+            drawSnow();
         }
 
-        // ==========================================
-        // INITIALIZATION
-        // ==========================================
-        window.addEventListener('load', function() {
-            initTilt();
-            initAvatarStars();
-            initTyping();
-            initVisitorCounter();
-            initSnow();
-
-            // Show gyro banner if needed (iOS 13+)
-            if (typeof DeviceOrientationEvent !== 'undefined' &&
-                typeof DeviceOrientationEvent.requestPermission === 'function') {
+        window.addEventListener('load', () => {
+            initTilt(); initAvatarStars(); typeWriter(); initVisitorCounter(); initSnow();
+            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 document.getElementById('gyro-banner').style.display = 'block';
             }
         });
-
-    })();
     </script>
 </body>
 </html>
