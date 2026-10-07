@@ -22,34 +22,25 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Lớp kính chính mặt trước - Đã giảm tối đa màu đen và độ nhòe để nhìn rõ nền */
+        /* Lớp kính chính mặt trước (Có độ trong suốt nhìn xuyên nhân vật nền) */
         .glass-card-main {
-            background: rgba(10, 10, 10, 0.08); 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(10, 10, 10, 0.12);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
-        /* 3D Content Layers - Cấu trúc không gian khối hộp */
+        /* Thiết lập không gian 3D cho khối hộp */
+        #tilt-box {
+            transform-style: preserve-3d !important;
+            will-change: transform;
+        }
+
+        /* 3D Content Layers - Nội dung nổi hẳn lên phía TRƯỚC */
         .layer-1 { transform: translateZ(40px); }
-        .layer-2 { transform: translateZ(70px); filter: drop-shadow(0 8px 10px rgba(0,0,0,0.6)); }
-        .layer-3 { transform: translateZ(100px); filter: drop-shadow(0 12px 15px rgba(0,0,0,0.8)); }
+        .layer-2 { transform: translateZ(75px); filter: drop-shadow(0 8px 12px rgba(0,0,0,0.7)); }
+        .layer-3 { transform: translateZ(110px); filter: drop-shadow(0 14px 18px rgba(0,0,0,0.85)); }
 
-        /* Hiệu ứng LED 7 màu RGB cực mượt cho Avatar phụ */
-        @keyframes rgb-led-glow {
-            0% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
-            15% { border-color: #ff7f00; box-shadow: 0 0 15px rgba(255, 127, 0, 0.8); }
-            33% { border-color: #ffff00; box-shadow: 0 0 15px rgba(255, 255, 0, 0.8); }
-            50% { border-color: #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); }
-            66% { border-color: #0000ff; box-shadow: 0 0 15px rgba(0, 0, 255, 0.8); }
-            83% { border-color: #4b0082; box-shadow: 0 0 15px rgba(75, 0, 130, 0.8); }
-            100% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
-        }
-        .rgb-led-border {
-            border: 2.5px solid #ff0000;
-            animation: rgb-led-glow 3s linear infinite; /* 3s một vòng sáng, mượt mà */
-        }
-
-        /* Hiệu ứng sao 4 cánh rơi quanh Avatar chính */
+        /* Hiệu ứng sao 4 cánh rơi quanh Avatar (nhỏ, rơi sâu, mờ nhạt như nguyên bản) */
         @keyframes starFall {
             0% { transform: translateY(-15px) rotate(0deg) scale(0); opacity: 0; }
             20% { opacity: 1; transform: translateY(10px) rotate(45deg) scale(1.2); }
@@ -63,8 +54,9 @@
             background-color: #ffffff;
             clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
             animation: starFall 2s linear forwards;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
             z-index: 30;
+            pointer-events: none;
         }
 
         .cursor {
@@ -75,6 +67,7 @@
             margin-left: 2px;
         }
         @keyframes blink { 50% { opacity: 0; } }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -82,10 +75,10 @@
 
         /* Hover Effects for Social Buttons */
         .social-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .social-btn.facebook:hover { background: rgba(24, 119, 242, 0.2); border-color: rgba(24, 119, 242, 0.8); box-shadow: 0 0 25px rgba(24, 119, 242, 0.6); transform: translateY(-2px); }
-        .social-btn.zalo:hover { background: rgba(0, 104, 255, 0.2); border-color: rgba(0, 104, 255, 0.8); box-shadow: 0 0 25px rgba(0, 104, 255, 0.6); transform: translateY(-2px); }
-        .social-btn.telegram:hover { background: rgba(14, 165, 233, 0.2); border-color: rgba(14, 165, 233, 0.8); box-shadow: 0 0 25px rgba(14, 165, 233, 0.6); transform: translateY(-2px); }
-        .social-btn.tiktok:hover { background: rgba(236, 72, 153, 0.2); border-color: rgba(236, 72, 153, 0.8); box-shadow: 0 0 25px rgba(236, 72, 153, 0.6); transform: translateY(-2px); }
+        .social-btn.facebook:hover { background: rgba(24, 119, 242, 0.25); border-color: rgba(24, 119, 242, 0.85); box-shadow: 0 0 25px rgba(24, 119, 242, 0.6); transform: translateY(-2px); }
+        .social-btn.zalo:hover { background: rgba(0, 104, 255, 0.25); border-color: rgba(0, 104, 255, 0.85); box-shadow: 0 0 25px rgba(0, 104, 255, 0.6); transform: translateY(-2px); }
+        .social-btn.telegram:hover { background: rgba(14, 165, 233, 0.25); border-color: rgba(14, 165, 233, 0.85); box-shadow: 0 0 25px rgba(14, 165, 233, 0.6); transform: translateY(-2px); }
+        .social-btn.tiktok:hover { background: rgba(236, 72, 153, 0.25); border-color: rgba(236, 72, 153, 0.85); box-shadow: 0 0 25px rgba(236, 72, 153, 0.6); transform: translateY(-2px); }
 
         @media (prefers-reduced-motion: reduce) {
             * {
@@ -100,78 +93,69 @@
 
 <body class="overflow-x-hidden bg-[#050505] text-white selection:bg-cyan-500 selection:text-white relative min-h-screen">
     
-    <!-- Background Video Động (Cyberpunk/Halo) -->
-    <video autoplay loop muted playsinline 
-           class="fixed inset-0 w-full h-full object-cover opacity-70 pointer-events-none z-0" 
-           style="filter: brightness(0.8);">
-        <!-- Bạn tải video về, đổi tên thành background.mp4 và đẩy lên github nhé -->
-        <source src="./background.mp4" type="video/mp4">
-    </video>
+    <!-- Ảnh Nền Chiến Binh Nữ Samurai & Rồng Đen Mới Được Cập Nhật -->
+    <img src="./background.jpg" 
+         alt="Background Wallpaper" 
+         class="fixed inset-0 w-full h-full object-cover pointer-events-none z-0" 
+         style="filter: brightness(0.72) contrast(1.05);">
     
-    <!-- Dark Gradient Overlay -->
-    <div class="fixed inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none"></div>
+    <!-- Dark Gradient Overlay tạo chiều sâu nghệ thuật -->
+    <div class="fixed inset-0 bg-gradient-to-b from-black/35 via-black/55 to-black/85 pointer-events-none z-0"></div>
     
-    <!-- Canvas for Snow Effect -->
+    <!-- Canvas for Snow Effect (Hiệu ứng tuyết rơi nguyên bản) -->
     <canvas id="snow-canvas" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true"></canvas>
 
     <!-- Gyroscope Permission Prompt for iOS 13+ -->
     <header id="gyro-banner" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden">
         <button id="gyro-permission-btn" onclick="requestGyroPermission()" aria-label="Bật hiệu ứng nghiêng 3D" class="text-[11px] px-4 py-2 rounded-full text-cyan-300 backdrop-blur-md shadow-lg flex items-center gap-2 cursor-pointer bg-white/10 border border-cyan-500/50 hover:bg-white/20 transition-all">
-            <i class="fas fa-compass animate-spin"></i> Bật hiệu ứng nghiêng 3D
+            <i class="fas fa-compass animate-spin"></i> Bật hiệu ứng nghiêng 3D (Gyro)
         </button>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-6 pointer-events-none">
+    <!-- Main Content Container (Perspective cho 3D Tilt mượt mà) -->
+    <main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-6" style="perspective: 1200px;">
         
-        <!-- 3D TILT BOX (Khối hộp 3D trong suốt) -->
-        <section id="tilt-box" class="relative w-[90%] max-w-[320px] rounded-[2rem] p-5 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out] pointer-events-auto bg-transparent" style="transform-style: preserve-3d;">
+        <!-- 3D TILT BOX (Khối hộp 3D kính phát sáng nguyên bản) -->
+        <section id="tilt-box" class="relative w-[90%] max-w-[320px] rounded-[2rem] p-5 flex flex-col items-center animate-[fadeInUp_0.8s_ease-out] bg-transparent">
             
-            <!-- Các lớp kính nền phát sáng (Trong suốt 100%, chỉ giữ hào quang) -->
+            <!-- ====== KHỐI HỘP 3D PHÁT SÁNG TRẮNG ĐA TẦNG ====== -->
+            
+            <!-- Lớp đáy sâu nhất (-90px): Viền phát sáng xa nhất -->
             <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none" 
-                 style="transform: translateZ(-90px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);"></div>
+                 style="transform: translateZ(-90px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);"></div>
                  
+            <!-- Lớp kính lót thứ 2 (-60px) -->
             <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none" 
-                 style="transform: translateZ(-60px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);"></div>
+                 style="transform: translateZ(-60px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);"></div>
                  
+            <!-- Lớp kính lót thứ 1 (-30px) -->
             <div class="absolute inset-0 rounded-[2rem] bg-transparent pointer-events-none" 
-                 style="transform: translateZ(-30px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);"></div>
+                 style="transform: translateZ(-30px); border: 1px solid rgba(255, 255, 255, 0.25); box-shadow: 0 0 25px rgba(255, 255, 255, 0.45);"></div>
                  
-            <!-- Lớp mặt kính trước siêu trong suốt -->
+            <!-- Lớp mặt kính trước (0px): Tinh thể pha lê trong suốt có độ bóng -->
             <div class="absolute inset-0 rounded-[2rem] glass-card-main pointer-events-none" 
-                 style="transform: translateZ(0px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 35px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);"></div>
+                 style="transform: translateZ(0px); border: 1px solid rgba(255, 255, 255, 0.45); box-shadow: 0 0 35px rgba(255, 255, 255, 0.55), inset 0 0 20px rgba(255, 255, 255, 0.2);"></div>
+                 
+            <!-- ============================================================= -->
 
-            <!-- Avatar Section (Chứa 2 Avatar) -->
-            <div class="layer-3 w-full flex justify-center items-center gap-4 relative z-10 mb-2">
-                
-                <!-- Avatar Phụ (Bên trái) - Viền LED 7 màu -->
-                <div class="relative group flex-shrink-0">
-                    <img crossorigin="anonymous" 
-                         src="./friend.png" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/200x200/222/fff?text=Bạn'" 
-                         alt="Avatar Bạn" 
-                         loading="lazy" 
-                         class="relative w-[70px] h-[70px] rounded-full object-cover z-10 transition-transform duration-300 group-hover:scale-110 rgb-led-border">
-                </div>
-
-                <!-- Avatar Chính (Thiên Long IOS - Bên phải) -->
-                <div class="relative group flex-shrink-0">
-                    <div class="absolute inset-0 rounded-full blur-xl opacity-50 transition duration-500" style="background-color: rgba(255, 255, 255, 0.8);"></div>
+            <!-- Avatar Section (Layer 3 - Nổi cao nhất Z=110px) -->
+            <div class="layer-3 w-full flex flex-col items-center relative z-10">
+                <div class="relative mb-3 group">
+                    <div class="absolute inset-0 rounded-full blur-xl opacity-60 transition duration-500" style="background-color: rgba(255, 255, 255, 0.85);"></div>
                     <div id="avatar-stars-container" class="absolute inset-[-30px] pointer-events-none overflow-hidden rounded-full z-20"></div>
-                    <img id="avatar-img" crossorigin="anonymous" 
+                    <img id="avatar-img" 
                          src="./6686ae04340f0125502a1fc08bf482da.jpg" 
                          onerror="this.onerror=null; this.src='https://placehold.co/200x200/0ea5e9/ffffff?text=Avatar'" 
-                         alt="Avatar Chính" 
+                         alt="Avatar" 
                          loading="lazy" 
                          decoding="async"
                          class="relative w-24 h-24 rounded-full object-cover z-10 transition-transform duration-300 group-hover:scale-110" 
-                         style="border: 2px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);">
+                         style="border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 0 22px rgba(255, 255, 255, 0.8);">
                 </div>
-
             </div>
 
-            <!-- Name and Info -->
-            <div class="layer-2 w-full flex flex-col items-center relative z-10 mt-2">
+            <!-- Name and Info (Layer 2 - Nổi Z=75px) -->
+            <div class="layer-2 w-full flex flex-col items-center relative z-10">
                 <header class="flex items-center justify-center gap-1.5 mt-1 w-full whitespace-nowrap">
                     <h1 class="text-[1.4rem] font-bold italic font-serif tracking-wide text-white drop-shadow-lg">
                         Thiên Long IOS
@@ -197,26 +181,26 @@
                 </div>
             </div>
 
-            <!-- Social Links -->
+            <!-- Social Links (Layer 1 - Nổi Z=40px) -->
             <div class="layer-1 w-full relative z-10">
                 <nav class="w-full flex flex-col gap-3" aria-label="Mạng xã hội">
                     
-                    <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Mở Facebook của Thiên Long IOS" class="social-btn facebook relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    <a href="https://www.facebook.com/share/1J5D6FRsGB/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Mở Facebook của Thiên Long IOS" class="social-btn facebook relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fab fa-facebook text-blue-500 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
                         <span class="font-medium tracking-wider text-xs">Facebook</span>
                     </a>
                     
-                    <a href="http://zaloapp.com/qr/p/1409r842vh1p1" target="_blank" rel="noopener noreferrer" aria-label="Mở Zalo" class="social-btn zalo relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    <a href="http://zaloapp.com/qr/p/1409r842vh1p1" target="_blank" rel="noopener noreferrer" aria-label="Mở Zalo" class="social-btn zalo relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fas fa-comment-dots text-blue-400 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
                         <span class="font-medium tracking-wider text-xs">Zalo</span>
                     </a>
 
-                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Mở Telegram" class="social-btn telegram relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Mở Telegram" class="social-btn telegram relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fab fa-telegram text-cyan-400 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
                         <span class="font-medium tracking-wider text-xs">Telegram</span>
                     </a>
                     
-                    <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK" target="_blank" rel="noopener noreferrer" aria-label="Mở TikTok" class="social-btn tiktok relative group flex items-center justify-center w-full py-2 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
+                    <a href="https://www.tiktok.com/@bon_3004._?_r=1&_t=ZS-9A8fnAcy6jK" target="_blank" rel="noopener noreferrer" aria-label="Mở TikTok" class="social-btn tiktok relative group flex items-center justify-center w-full py-2.5 rounded-xl bg-white/5 border border-white/10 overflow-hidden shadow-sm">
                         <i class="fab fa-tiktok text-white group-hover:text-pink-500 text-[18px] absolute left-5 group-hover:scale-125 transition-transform" aria-hidden="true"></i>
                         <span class="font-medium tracking-wider text-xs">TikTok</span>
                     </a>
@@ -224,7 +208,7 @@
                 </nav>
             </div>
             
-            <!-- Footer -->
+            <!-- Footer (Layer 1 - Nổi Z=40px) -->
             <footer class="mt-5 flex flex-col items-center gap-1.5 layer-1 relative z-10">
                 <div class="text-[10px] text-gray-400 tracking-wider flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/10 shadow-inner" aria-label="Số lượt truy cập">
                     <i class="fas fa-eye text-cyan-400" aria-hidden="true"></i> Truy cập: <span id="visitor-count" class="font-bold text-cyan-300"></span>
@@ -240,6 +224,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <script>
+        // Hiệu ứng hạt sao 4 cánh rơi quanh avatar
         function initAvatarStars() {
             const container = document.getElementById('avatar-stars-container');
             if (!container) return;
@@ -255,22 +240,29 @@
             }, 300);
         }
 
+        // Khởi tạo hiệu ứng Nghiêng 3D Chuột & Con Quay Hồi Chuyển Gyro
         let tiltInstance;
         function initTilt() {
             const tiltElement = document.querySelector("#tilt-box");
             if (!tiltElement) return;
             if (tiltInstance) tiltInstance.destroy();
             VanillaTilt.init(tiltElement, {
-                max: 22,
+                max: 24,
                 speed: 400,
+                perspective: 1000,
                 glare: true,
-                "max-glare": 0.12, 
+                "max-glare": 0.18, 
                 scale: 1.05,
-                gyroscope: true
+                gyroscope: true,
+                gyroscopeMinAngleX: -45,
+                gyroscopeMaxAngleX: 45,
+                gyroscopeMinAngleY: -45,
+                gyroscopeMaxAngleY: 45
             });
             tiltInstance = tiltElement.vanillaTilt;
         }
 
+        // Yêu cầu quyền con quay hồi chuyển trên thiết bị iOS 13+
         function requestGyroPermission() {
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 DeviceOrientationEvent.requestPermission().then(response => {
@@ -284,6 +276,7 @@
             }
         }
 
+        // Hiệu ứng chữ gõ khẩu hiệu
         const text = "ĐẸP TRAI VÀ ĐẲNG CẤP";
         let textIndex = 0;
         function typeWriter() {
@@ -294,6 +287,7 @@
             }
         }
 
+        // Đếm số lượt truy cập an toàn
         function safeLocalStorageGet(key, fallback) {
             try { const val = localStorage.getItem(key); return val !== null ? JSON.parse(val) : fallback; } catch { return fallback; }
         }
@@ -301,13 +295,14 @@
             try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
         }
         function initVisitorCounter() {
-            let count = safeLocalStorageGet('tlios_visitors', 5125);
+            let count = safeLocalStorageGet('tlios_visitors', 4560);
             if (typeof count === 'number') count++;
             safeLocalStorageSet('tlios_visitors', count);
             const disp = document.getElementById('visitor-count');
             if (disp) disp.innerText = count.toLocaleString();
         }
 
+        // Hiệu ứng tuyết rơi Canvas
         let snowAnimationFrame;
         function initSnow() {
             const canvas = document.getElementById('snow-canvas');
@@ -334,7 +329,11 @@
         }
 
         window.addEventListener('load', () => {
-            initTilt(); initAvatarStars(); typeWriter(); initVisitorCounter(); initSnow();
+            initTilt(); 
+            initAvatarStars(); 
+            typeWriter(); 
+            initVisitorCounter(); 
+            initSnow();
             if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
                 document.getElementById('gyro-banner').style.display = 'block';
             }
